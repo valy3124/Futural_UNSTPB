@@ -8,12 +8,12 @@
 #SBATCH --error=backend_%j.err
 
 ###############################################################################
-# 1️⃣  Activate Conda
+#  Activate Conda
 ###############################################################################
 source ~/miniconda3/bin/activate py310
 
 ###############################################################################
-# 2️⃣  Local scratch on compute node
+# 2️ Local scratch on compute node
 ###############################################################################
 export HF_HOME="$TMPDIR/hf_cache"
 export TRANSFORMERS_CACHE="$HF_HOME/transformers"
@@ -21,9 +21,9 @@ export MODEL_DIR="$TMPDIR/DeepSeek"
 mkdir -p "$HF_HOME" "$MODEL_DIR"
 
 ###############################################################################
-# 3️⃣  Download model to $TMPDIR  (doar prima oară pe nod)
+# 3️  Download model to $TMPDIR  (doar prima oară pe nod)
 ##############################################################################
-# 3️⃣  Download model (TOATE fişierele)
+# 4  Download model (TOATE fişierele)
 python - <<'PY'
 from huggingface_hub import snapshot_download
 import pathlib, os, sys
@@ -35,7 +35,7 @@ snapshot_download(
 )
 PY
 
-# 3.5️⃣  Convert 4-bit dacă nu există deja cele 2 shard-uri
+# 5.  Convert 4-bit dacă nu există deja cele 2 shard-uri
 python - <<'PY'
 import os, pathlib, sys
 MODEL = pathlib.Path(os.environ["MODEL_DIR"])
@@ -48,7 +48,7 @@ PY
 
 
 ###############################################################################
-# 4️⃣  Launch backend with nohup (exact cum aveai)
+# 6  Launch backend with nohup 
 ###############################################################################
 cd ~/cluster
 
