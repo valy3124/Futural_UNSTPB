@@ -1,0 +1,3 @@
+[submodule "durangaldea-chatbot"]
+	path = durangaldea-chatbot
+	url = https://github.com/valy3124/durangaldea-chatbot.git
