@@ -1,11 +1,12 @@
-﻿# Natural Language Querying of Structured Data
+# Natural Language Querying of Structured Data
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+[![Model](https://img.shields.io/badge/🤗_Model-valy3124/futural--assistant-FFD21E.svg)](https://huggingface.co/valy3124/futural-assistant)
+[![Dataset](https://img.shields.io/badge/🤗_Dataset-valy3124/durangaldea--2q-FFD21E.svg)](https://huggingface.co/datasets/valy3124/durangaldea-2q)
 
 ## Overview
 Welcome to the repository for the **Natural Language to Structured Data Querying** methodology, developed in conjunction with the **FUTURAL** project. 
-
 
 This repository provides a fully open-source pipeline for translating natural language questions into executable queries on highly structured, non-textual datasets. Unlike traditional Retrieval-Augmented Generation (RAG) pipelines that struggle with numerical and structured information, our approach trains a compact Large Language Model (DeepSeek R1-Distill-8B) to generate accurate, executable data queries directly from user prompts.
 
@@ -26,6 +27,11 @@ By utilizing QLoRA with 4-bit quantization, this methodology ensures high-accura
 ## Use Case: Durangaldea Accessibility
 The methodology is currently applied and evaluated on a comprehensive rural accessibility dataset from Durangaldea, Spain. The dataset tracks coordinates and travel times (walking, cycling, driving) to essential services (hospitals, supermarkets, and pharmacies). The system acts as a natural-language interface for stakeholders to perform Quality of Life assessments and demographic settlement analysis.
 
+## Model & Dataset
+The fine-tuned model weights and the generated synthetic training dataset are publicly available on Hugging Face:
+- **Model:** [valy3124/futural-assistant](https://huggingface.co/valy3124/futural-assistant)
+- **Dataset:** [valy3124/durangaldea-2q](https://huggingface.co/datasets/valy3124/durangaldea-2q)
+
 ## Repository Structure
 
 ```text
@@ -42,26 +48,3 @@ The methodology is currently applied and evaluated on a comprehensive rural acce
     ├── filters.py           # Structured dataset filtering logic
     ├── location_script.py   # Coordinate and location tracking logic
     └── utils.py             # General purpose utility functions
-```
-
-## Getting Started
-
-### Prerequisites
-- Python 3.8+
-- PyTorch with CUDA support (for model fine-tuning and fast inference)
-- SLURM workload manager (optional, if using the provided cluster scripts)
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/valy3124/Futural_UNSTPB.git
-   cd Futural_UNSTPB
-   ```
-
-### Usage
-- **Data Generation:** Run the scripts in the `scripts/` directory to generate your custom synthetic training pairs.
-- **Fine-Tuning:** Execute `scripts/finetune_model.py` to initiate the QLoRA 4-bit fine-tuning process.
-- **Deployment:** Use `deploy/run_backend.slurm` to start up the model backend on a SLURM-managed cluster, and execute `src/app.py` to launch the user interface.
-
-## Research & Methodology 
-This repository implements the methodologies discussed in our research on querying structured data through natural language using language models. It emphasizes fully automated workflows and independence from external APIs at deployment time.
